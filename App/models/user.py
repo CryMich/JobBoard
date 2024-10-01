@@ -10,11 +10,8 @@ class User(db.Model):
         self.username = username
         self.set_password(password)
 
-    def get_json(self):
-        return{
-            'id': self.id,
-            'username': self.username
-        }
+    def __repr__(self):
+        return f'<User {self.id} {self.username}>'
 
     def set_password(self, password):
         """Create hashed password."""
@@ -23,4 +20,10 @@ class User(db.Model):
     def check_password(self, password):
         """Check hashed password."""
         return check_password_hash(self.password, password)
+
+    def toJSON(self):
+        return{
+            'id': self.id,
+            'username': self.username
+        }
 
